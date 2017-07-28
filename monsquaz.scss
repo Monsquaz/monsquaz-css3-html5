@@ -1,0 +1,97 @@
+/* scene: 574 x 429 */
+
+$scene-width:       574px;
+$scene-height:      429px;
+$movie-length:      500;    /* frames */
+$movie-frame-rate:  20;
+
+/*
+
+  framerate: 20fps
+  total frames: 490
+    =>
+    total length: 24.5s
+
+  parts:
+  1. Green arrows: 41 frames
+  2. sunset: frames
+  3. Pink arrows: frames
+  4. zoom in: 39frames
+*/
+
+@function w($width){
+  @return $width / 574px * 100%
+}
+
+@function h($height){
+  @return $height / 429px * 100%
+}
+
+#monsquaz-swf {
+  width: 100vw;
+  height: 100vh;
+  top: 0px;
+  left: 0px;
+  position: fixed;
+  background-color: red;
+}
+
+#up-arrow-1 {
+  top:    h(240px);
+  left:   w(57px);
+  width:  w(136px);
+  height: h(146px);
+  animation: up-arrow-1-position 8s linear        infinite,
+             up-arrow-opacity    8s steps(1, end) infinite;
+}
+
+@keyframes up-arrow-1-position {
+  0%   {
+    top: 70%;
+  }
+  25%, 100%  {
+    top: -(h(146px));
+  }
+}
+
+#up-arrow-2 {
+  top:    w(184px);
+  left:   h(335px);
+  width:  w(136px);
+  height: h(146px);
+}
+
+#down-arrow-1 {
+  top:    h(187px);
+  left:   w(36px);
+  width:  w(136px);
+  height: h(146px);
+}
+
+#down-arrow-2 {
+  top:    h(116px);
+  left:   w(317px);
+  width:  w(136px);
+  height: h(146px);
+}
+
+#monsquaz-man {
+  top:    h(15px);
+  left:   w(175px);
+  width:  w(203px);
+  height: h(405px);
+}
+
+#deven-gallo-1 {
+  top:    h(147px);
+  left:   w(5px);
+  width:  w(104px);
+  height: h(277px);
+}
+
+#deven-gallo-2 {
+  top:    h(157px);
+  left:   w(15px);
+  width:  w(104px);
+  height: h(277px);
+}
