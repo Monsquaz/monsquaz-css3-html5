@@ -46,6 +46,7 @@ audio {
   position:         fixed;
   background-color: red;
   visibility:       hidden;
+  overflow:         hidden;
 
   .background {
     position: absolute;
@@ -173,6 +174,25 @@ audio {
       height: h(146px);
     }
 
+    #deven-gallo-1 {
+      top:    h(147px);
+      left:   w(5px);
+      width:  w(104px);
+      height: h(277px);
+      animation:  deven-gallo-1-position $movie-seconds linear infinite,
+                  deven-gallo-opacity $movie-seconds steps(1, end) infinite;
+    }
+
+    #deven-gallo-2 {
+      top:    h(157px);
+      left:   w(470px);
+      width:  w(104px);
+      height: h(277px);
+      animation:  deven-gallo-2-position $movie-seconds linear infinite,
+                  deven-gallo-opacity $movie-seconds steps(1, end) infinite;
+
+    }
+
     #monsquaz-up {
       top:    h(15px);
       left:   w(175px);
@@ -208,22 +228,65 @@ audio {
         monsquaz-zoom-opacity framesToSeconds($movie-total-frames) steps(1, end) infinite;
     }
 
-    #deven-gallo-1 {
-      top:    h(147px);
-      left:   w(5px);
-      width:  w(104px);
-      height: h(277px);
-    }
-
-    #deven-gallo-2 {
-      top:    h(157px);
-      left:   w(15px);
-      width:  w(104px);
-      height: h(277px);
-    }
-
   }
 
+}
+
+@keyframes deven-gallo-1-position {
+  0%, #{framesToPercent($scene-2-start)} {
+    left: w(0px);
+    top: h(170px);
+  }
+  #{framesToPercent(10 + $scene-2-start)}, 100%  {
+    left: w(0px);
+    top: h(230px);
+  }
+  #{framesToPercent(19 + $scene-2-start)}, 100%  {
+    left: w(0px);
+    top: h(170px);
+  }
+  #{framesToPercent(29 + $scene-2-start)}, 100%  {
+    left: w(0px);
+    top: h(230px);
+  }
+  #{framesToPercent(40 + $scene-2-start)}, 100%  {
+    left: w(0px);
+    top: h(170px);
+  }
+}
+
+@keyframes deven-gallo-opacity {
+  0%  {
+    opacity: 0;
+  }
+  #{framesToPercent($scene-2-start)}  {
+    opacity: 1;
+  }
+  #{framesToPercent($scene-3-start)}, 100%  {
+    opacity: 0;
+  }
+}
+
+/**/
+
+
+
+@keyframes deven-gallo-2-position {
+  0%, #{framesToPercent($scene-2-start)} {
+    top: h(230px);
+  }
+  #{framesToPercent(10 + $scene-2-start)}, 100%  {
+    top: h(170px);
+  }
+  #{framesToPercent(19 + $scene-2-start)}, 100%  {
+    top: h(230px);
+  }
+  #{framesToPercent(29 + $scene-2-start)}, 100%  {
+    top: h(170px);
+  }
+  #{framesToPercent(40 + $scene-2-start)}, 100%  {
+    top: h(230px);
+  }
 }
 
 @keyframes monsquaz-up {
