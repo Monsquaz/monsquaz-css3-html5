@@ -1,97 +1,330 @@
-/* scene: 574 x 429 */
+@import "sass-animation-chain";
 
-$scene-width:       574px;
-$scene-height:      429px;
-$movie-length:      500;    /* frames */
-$movie-frame-rate:  20;
+$scene-width:         574px;
+$scene-height:        429px;
+$movie-total-frames:  158;
+$movie-frame-rate:    20;
+$movie-seconds:       $movie-total-frames / $movie-frame-rate * 1s;
 
-/*
+$green-arrows-frames: 41;
+$sunset-frames:       40;
+$pink-arrows-frames:  38;
+$zoom-in-frames:      39;
 
-  framerate: 20fps
-  total frames: 490
-    =>
-    total length: 24.5s
+$scene-1-start: 0;
+$scene-2-start: $scene-1-start + $green-arrows-frames;
+$scene-3-start: $scene-2-start + $sunset-frames;
+$scene-4-start: $scene-3-start + $pink-arrows-frames;
 
-  parts:
-  1. Green arrows: 41 frames
-  2. sunset: frames
-  3. Pink arrows: frames
-  4. zoom in: 39frames
-*/
+
+
+@function framesToPercent($frames) {
+  @return $frames / $movie_total_frames * 100%;
+}
+
+@function framesToSeconds($frames) {
+  @return $frames / $movie-frame-rate * 1s;
+}
 
 @function w($width){
-  @return $width / 574px * 100%
+  @return $width / $scene-width * 100%
 }
 
 @function h($height){
-  @return $height / 429px * 100%
+  @return $height / $scene-height * 100%
+}
+
+audio {
+  display: none !important;
 }
 
 #monsquaz-swf {
-  width: 100vw;
-  height: 100vh;
-  top: 0px;
-  left: 0px;
-  position: fixed;
+  width:            $scene-width;  /* We could set this to 100vw later */
+  height:           $scene-height; /* We could set this to 100vh later */
+  top:              0px;
+  left:             0px;
+  position:         fixed;
   background-color: red;
-}
+  visibility:       hidden;
 
-#up-arrow-1 {
-  top:    h(240px);
-  left:   w(57px);
-  width:  w(136px);
-  height: h(146px);
-  animation: up-arrow-1-position 8s linear        infinite,
-             up-arrow-opacity    8s steps(1, end) infinite;
-}
-
-@keyframes up-arrow-1-position {
-  0%   {
-    top: 70%;
+  .background {
+    position: absolute;
+    z-index:  1;
+    top:      0px;
+    left:     0px;
+    width:    100%;
+    height:   100%;
   }
-  25%, 100%  {
-    top: -(h(146px));
+
+  .object {
+    position: absolute;
+    z-index:  2;
+  }
+
+  &.active {
+
+    visibility: visible;
+
+    #up-background {
+      animation:
+        up-background-opacity $movie-seconds steps(1, end) infinite;
+    }
+
+    @keyframes up-background-opacity {
+      0%   {
+        opacity: 1;
+      }
+      #{framesToPercent($scene-2-start)}, 100%  {
+        opacity: 0;
+      }
+    }
+
+    #sunset-background {
+      animation:
+        sunset-background-opacity $movie-seconds steps(1, end) infinite;
+    }
+
+    @keyframes sunset-background-opacity {
+      #{framesToPercent($scene-1-start)} {
+        opacity: 0;
+      }
+      #{framesToPercent($scene-2-start)}   {
+        opacity: 1;
+      }
+      #{framesToPercent($scene-3-start)}, 100%  {
+        opacity: 0;
+      }
+    }
+
+    #down-background {
+      animation:
+        down-background-opacity $movie-seconds steps(1, end) infinite;
+    }
+
+    @keyframes down-background-opacity {
+      #{framesToPercent($scene-1-start)} {
+        opacity: 0;
+      }
+      #{framesToPercent($scene-3-start)}   {
+        opacity: 1;
+      }
+      #{framesToPercent($scene-4-start)}, 100%  {
+        opacity: 0;
+      }
+    }
+
+    #up-arrow-1 {
+      top:        h(240px);
+      left:       w(57px);
+      width:      w(136px);
+      height:     h(146px);
+      animation:  up-arrow-1-position $movie-seconds linear infinite,
+                  up-arrow-opacity    $movie-seconds steps(1, end) infinite;
+
+    }
+
+    @keyframes up-arrow-1-position {
+      0% {
+        top: h(240px);
+      }
+      #{framesToPercent($scene-2-start)}, 100%  {
+        top: h(100px);
+      }
+    }
+
+    @keyframes up-arrow-opacity {
+      0%   {
+        opacity: 1;
+      }
+      #{framesToPercent($scene-2-start)}, 100%  {
+        opacity: 0;
+      }
+    }
+
+    #up-arrow-2 {
+      top:    w(184px);
+      left:   h(300px);
+      width:  w(136px);
+      height: h(146px);
+      animation:  up-arrow-2-position $movie-seconds linear infinite,
+                  up-arrow-opacity    $movie-seconds steps(1, end) infinite;
+    }
+
+    @keyframes up-arrow-2-position {
+      0% {
+        top:  h(184px);
+      }
+      #{framesToPercent($green-arrows-frames)}, 100%  {
+        top:  h(0px);
+      }
+    }
+
+    #down-arrow-1 {
+      top:    h(187px);
+      left:   w(36px);
+      width:  w(136px);
+      height: h(146px);
+    }
+
+    #down-arrow-2 {
+      top:    h(116px);
+      left:   w(317px);
+      width:  w(136px);
+      height: h(146px);
+    }
+
+    #monsquaz-up {
+      top:    h(15px);
+      left:   w(175px);
+      width:  w(203px);
+      height: h(405px);
+      animation:
+        monsquaz-up framesToSeconds($movie-total-frames) linear 0s infinite,
+        monsquaz-up-opacity framesToSeconds($movie-total-frames) steps(1, end) infinite;
+
+    }
+
+    #monsquaz-dance {
+      width:  w(203px);
+      height: h(405px);
+      animation:
+        monsquaz-dance framesToSeconds($movie-total-frames) linear 0s infinite,
+        monsquaz-dance-opacity framesToSeconds($movie-total-frames) steps(1, end) infinite;
+    }
+
+    #monsquaz-down {
+      width:  w(203px);
+      height: h(405px);
+      animation:
+        monsquaz-down framesToSeconds($movie-total-frames) linear 0s infinite,
+        monsquaz-down-opacity framesToSeconds($movie-total-frames) steps(1, end) infinite;
+    }
+
+    #monsquaz-zoom {
+      width:  w(203px);
+      height: h(405px);
+      animation:
+        monsquaz-zoom framesToSeconds($movie-total-frames) linear 0s infinite,
+        monsquaz-zoom-opacity framesToSeconds($movie-total-frames) steps(1, end) infinite;
+    }
+
+    #deven-gallo-1 {
+      top:    h(147px);
+      left:   w(5px);
+      width:  w(104px);
+      height: h(277px);
+    }
+
+    #deven-gallo-2 {
+      top:    h(157px);
+      left:   w(15px);
+      width:  w(104px);
+      height: h(277px);
+    }
+
+  }
+
+}
+
+@keyframes monsquaz-up {
+  #{framesToPercent($scene-1-start)} {
+    left: w(150px);
+    top: h(450px);
+  }
+  #{framesToPercent($scene-2-start)}, 100% {
+    left: w(150px);
+    top: -(h(450px));
   }
 }
 
-#up-arrow-2 {
-  top:    w(184px);
-  left:   h(335px);
-  width:  w(136px);
-  height: h(146px);
+@keyframes monsquaz-up-opacity {
+  0%  {
+    opacity: 1;
+  }
+  #{framesToPercent($scene-2-start)}, 100%  {
+    opacity: 0;
+  }
 }
 
-#down-arrow-1 {
-  top:    h(187px);
-  left:   w(36px);
-  width:  w(136px);
-  height: h(146px);
+@keyframes monsquaz-dance {
+  0% {}
+  #{framesToPercent($scene-2-start)}  {
+    left: w(150px);
+    top:  h(50px);
+  }
+  #{framesToPercent($scene-2-start + 10)} {
+    left: w(100px);
+    top:  h(100px);
+  }
+  #{framesToPercent($scene-2-start + 19)} {
+    left: w(150px);
+    top:  h(50px);
+  }
+  #{framesToPercent($scene-2-start + 29)}  {
+    left: w(200px);
+    top:  h(100px);
+  }
+  #{framesToPercent($scene-3-start - 1)}, 100% {
+    left: w(150px);
+    top:  h(50px);
+  }
 }
 
-#down-arrow-2 {
-  top:    h(116px);
-  left:   w(317px);
-  width:  w(136px);
-  height: h(146px);
+@keyframes monsquaz-dance-opacity {
+  0%  {
+    opacity: 0;
+  }
+  #{framesToPercent($scene-2-start)}  {
+    opacity: 1;
+  }
+  #{framesToPercent($scene-3-start)}, 100%  {
+    opacity: 0;
+  }
 }
 
-#monsquaz-man {
-  top:    h(15px);
-  left:   w(175px);
-  width:  w(203px);
-  height: h(405px);
+@keyframes monsquaz-down {
+  #{framesToPercent($scene-3-start)} {
+    left: w(150px);
+    top: -(h(450px));
+  }
+  #{framesToPercent($scene-4-start)}, 100% {
+    left: w(150px);
+    top: h(450px);
+  }
 }
 
-#deven-gallo-1 {
-  top:    h(147px);
-  left:   w(5px);
-  width:  w(104px);
-  height: h(277px);
+@keyframes monsquaz-down-opacity {
+  0%  {
+    opacity: 0;
+  }
+  #{framesToPercent($scene-3-start)}  {
+    opacity: 1;
+  }
+  #{framesToPercent($scene-4-start)}, 100%  {
+    opacity: 0;
+  }
 }
 
-#deven-gallo-2 {
-  top:    h(157px);
-  left:   w(15px);
-  width:  w(104px);
-  height: h(277px);
+@keyframes monsquaz-zoom {
+  #{framesToPercent($scene-4-start)} {
+    left:   w(150px);
+    top:    h(300px);
+    width:  w(203px);
+    height: h(405px);
+  }
+  100% {
+    left:   w(0px); /* TODO: Check these! */
+    top:    h(0px); /* TODO: Check these! */
+    width:  w(2.5 * 203px);
+    height: h(2.5 * 405px);
+  }
+}
+
+@keyframes monsquaz-zoom-opacity {
+  0%  {
+    opacity: 0;
+  }
+  #{framesToPercent($scene-4-start)}, 100%  {
+    opacity: 1;
+  }
 }
