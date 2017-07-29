@@ -1,5 +1,3 @@
-@import "sass-animation-chain";
-
 $scene-width:         574px;
 $scene-height:        429px;
 $movie-total-frames:  158;
@@ -19,8 +17,6 @@ $scene-4-start: $scene-3-start + $pink-arrows-frames;
 $zoom-radius: 50%;
 
 $timing-function: 'linear';
-
-
 
 @function framesToPercent($frames) {
   @return $frames / $movie_total_frames * 100%;
@@ -426,6 +422,30 @@ audio {
         monsquaz-zoom-opacity framesToSeconds($movie-total-frames) steps(1, end) infinite;
     }
 
+    @keyframes monsquaz-zoom {
+      0%, #{framesToPercent($scene-4-start)} {
+        left:   w(150px);
+        top:    h(300px);
+        width:  w(203px);
+        height: h(405px);
+        transform: scale(1);
+      }
+      100% {
+        left:   w(0px); /* TODO: Check these! */
+        top:    h(0px); /* TODO: Check these! */
+        transform: scale(2.5);
+      }
+    }
+
+    @keyframes monsquaz-zoom-opacity {
+      0% {
+        opacity: 0;
+      }
+      #{framesToPercent($scene-4-start)}, 100%  {
+        opacity: 1;
+      }
+    }
+
   }
 
 }
@@ -508,8 +528,7 @@ audio {
 }
 
 @keyframes monsquaz-dance {
-  0% {}
-  #{framesToPercent($scene-2-start)}  {
+  0%, #{framesToPercent($scene-2-start)}  {
     left: w(150px);
     top:  h(50px);
   }
@@ -544,7 +563,7 @@ audio {
 }
 
 @keyframes monsquaz-down {
-  #{framesToPercent($scene-3-start)} {
+  0%, #{framesToPercent($scene-3-start)} {
     left: w(150px);
     top: -(h(450px));
   }
@@ -563,29 +582,5 @@ audio {
   }
   #{framesToPercent($scene-4-start)}, 100%  {
     opacity: 0;
-  }
-}
-
-@keyframes monsquaz-zoom {
-  #{framesToPercent($scene-4-start)} {
-    left:   w(150px);
-    top:    h(300px);
-    width:  w(203px);
-    height: h(405px);
-    transform: scale(1);
-  }
-  100% {
-    left:   w(0px); /* TODO: Check these! */
-    top:    h(0px); /* TODO: Check these! */
-    transform: scale(2.5);
-  }
-}
-
-@keyframes monsquaz-zoom-opacity {
-  0%  {
-    opacity: 0;
-  }
-  #{framesToPercent($scene-4-start)}, 100%  {
-    opacity: 1;
   }
 }
