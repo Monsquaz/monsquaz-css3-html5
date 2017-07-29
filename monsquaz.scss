@@ -39,8 +39,8 @@ audio {
 }
 
 #monsquaz-swf {
-  width:            $scene-width;  /* We could set this to 100vw later */
-  height:           $scene-height; /* We could set this to 100vh later */
+  width:            $scene-width * 1.5;
+  height:           $scene-height * 1.5;
   top:              0px;
   left:             0px;
   position:         fixed;
@@ -275,7 +275,7 @@ audio {
 
     #up-arrow-1 {
       top:        h(240px);
-      left:       w(57px);
+      left:       w(55px);
       width:      w(136px);
       height:     h(146px);
       animation:  up-arrow-1-position $movie-seconds #{$timing-function} infinite,
@@ -285,7 +285,7 @@ audio {
 
     @keyframes up-arrow-1-position {
       0% {
-        top: h(240px);
+        top: h(200px);
       }
       #{framesToPercent($scene-2-start)}, 100%  {
         top: h(100px);
@@ -303,7 +303,7 @@ audio {
 
     #up-arrow-2 {
       top:    w(184px);
-      left:   h(300px);
+      left:   w(250px);
       width:  w(136px);
       height: h(146px);
       animation:  up-arrow-2-position $movie-seconds #{$timing-function} infinite,
@@ -312,7 +312,7 @@ audio {
 
     @keyframes up-arrow-2-position {
       0% {
-        top:  h(184px);
+        top:  h(300px);
       }
       #{framesToPercent($green-arrows-frames)}, 100%  {
         top:  h(0px);
@@ -330,7 +330,7 @@ audio {
 
     #down-arrow-2 {
       top:    h(116px);
-      left:   w(317px);
+      left:   w(55px);
       width:  w(136px);
       height: h(146px);
       animation:  down-arrow-2-position $movie-seconds #{$timing-function} infinite,
