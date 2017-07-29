@@ -16,6 +16,8 @@ $scene-2-start: $scene-1-start + $green-arrows-frames;
 $scene-3-start: $scene-2-start + $sunset-frames;
 $scene-4-start: $scene-3-start + $pink-arrows-frames;
 
+$zoom-radius: 50%;
+
 $timing-function: 'linear';
 
 
@@ -113,6 +115,165 @@ audio {
       }
       #{framesToPercent($scene-4-start)}, 100%  {
         opacity: 0;
+      }
+    }
+
+    #blue-square {
+      background-color: rgb(0,0,128);
+      animation: zoom-background-opacity $movie-seconds steps(1, end) infinite;
+    }
+
+    #red-square {
+      background-color: rgb(255,0,0);
+      animation: red-square-opacity $movie-seconds #{$timing-function} infinite;
+    }
+
+    #yellow-circle {
+      border: 5px solid rgb(255, 255, 0);
+      border-radius: $zoom-radius;
+      left: 50%;
+      top: 50%;
+      animation:
+        yellow-circle-size $movie-seconds #{$timing-function} infinite,
+        zoom-background-opacity $movie-seconds steps(1, end) infinite;
+    }
+
+    @keyframes yellow-circle-size {
+      0%, #{framesToPercent($scene-4-start)} {
+        width: 0%;
+        height: 0%;
+        left: 50%;
+        top: 50%;
+      }
+      #{framesToPercent(7 + $scene-4-start)} {
+        width: 100%;
+        height: 100%;
+        left: 0%;
+        top: 0%;
+      }
+      #{framesToPercent(14 + $scene-4-start)} {
+        width: 0%;
+        height: 0%;
+        left: 50%;
+        top: 50%;
+      }
+      #{framesToPercent(21 + $scene-4-start)} {
+        width: 100%;
+        height: 100%;
+        left: 0%;
+        top: 0%;
+      }
+      #{framesToPercent(28 + $scene-4-start)} {
+        width: 0%;
+        height: 0%;
+        left: 50%;
+        top: 50%;
+      }
+      #{framesToPercent(35 + $scene-4-start)} {
+        width: 100%;
+        height: 100%;
+        left: 0%;
+        top: 0%;
+      }
+      #{framesToPercent(39 + $scene-4-start)} {
+        width: 0%;
+        height: 0%;
+        left: 50%;
+        top: 50%;
+      }
+    }
+
+    #green-circle {
+      border: 5px solid rgb(0, 255, 128);
+      border-radius: $zoom-radius;
+      left: 50%;
+      top: 50%;
+      animation:
+        green-circle-size $movie-seconds #{$timing-function} infinite,
+        green-circle-opacity $movie-seconds steps(1, end) infinite;
+    }
+
+    @keyframes green-circle-size {
+      0%, #{framesToPercent(7 + $scene-4-start)} {
+        width: 0%;
+        height: 0%;
+        left: 50%;
+        top: 50%;
+      }
+      #{framesToPercent(14 + $scene-4-start)} {
+        width: 100%;
+        height: 100%;
+        left: 0%;
+        top: 0%;
+      }
+      #{framesToPercent(21 + $scene-4-start)} {
+        width: 0%;
+        height: 0%;
+        left: 50%;
+        top: 50%;
+      }
+      #{framesToPercent(28 + $scene-4-start)} {
+        width: 100%;
+        height: 100%;
+        left: 0%;
+        top: 0%;
+      }
+      #{framesToPercent(35 + $scene-4-start)} {
+        width: 0%;
+        height: 0%;
+        left: 50%;
+        top: 50%;
+      }
+      #{framesToPercent(39 + $scene-4-start)} {
+        width: 100%;
+        height: 100%;
+        left: 0%;
+        top: 0%;
+      }
+    }
+
+    @keyframes zoom-background-opacity {
+      0%   {
+        opacity: 0;
+      }
+      #{framesToPercent($scene-4-start)}, 100%  {
+        opacity: 1;
+      }
+    }
+
+    @keyframes green-circle-opacity {
+      0%   {
+        opacity: 0;
+      }
+      #{framesToPercent(7 + $scene-4-start)}, 100%  {
+        opacity: 1;
+      }
+    }
+
+    @keyframes red-square-opacity {
+      0%, #{framesToPercent($scene-4-start)} {
+        opacity: 0;
+      }
+      #{framesToPercent(6 + $scene-4-start)} {
+        opacity: 1;
+      }
+      #{framesToPercent(12 + $scene-4-start)} {
+        opacity: 0;
+      }
+      #{framesToPercent(18 + $scene-4-start)} {
+        opacity: 1;
+      }
+      #{framesToPercent(24 + $scene-4-start)} {
+        opacity: 0;
+      }
+      #{framesToPercent(30 + $scene-4-start)} {
+        opacity: 1;
+      }
+      #{framesToPercent(34 + $scene-4-start)} {
+        opacity: 0;
+      }
+      #{framesToPercent(39 + $scene-4-start)} {
+        opacity: 1;
       }
     }
 
@@ -259,6 +420,7 @@ audio {
     #monsquaz-zoom {
       width:  w(203px);
       height: h(405px);
+      transform-origin: 0px 0px;
       animation:
         monsquaz-zoom framesToSeconds($movie-total-frames) #{$timing-function} 0s infinite,
         monsquaz-zoom-opacity framesToSeconds($movie-total-frames) steps(1, end) infinite;
@@ -410,12 +572,12 @@ audio {
     top:    h(300px);
     width:  w(203px);
     height: h(405px);
+    transform: scale(1);
   }
   100% {
     left:   w(0px); /* TODO: Check these! */
     top:    h(0px); /* TODO: Check these! */
-    width:  w(2.5 * 203px);
-    height: h(2.5 * 405px);
+    transform: scale(2.5);
   }
 }
 
