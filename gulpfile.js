@@ -1,10 +1,11 @@
 let gulp            = require('gulp');
 let cssnano         = require('gulp-cssnano');
 let sass            = require('gulp-sass');
+let uglify          = require('gulp-uglifyjs');
 let moduleImporter  = require('sass-module-importer');
 
 gulp.task('css', function(){
-  return gulp.src(['monsquaz.scss'])
+  return gulp.src(['src/monsquaz.scss'])
     .pipe(sass({ importer: moduleImporter() }))
     .pipe(cssnano({
       autoprefixer: {
@@ -22,6 +23,13 @@ gulp.task('css', function(){
     .pipe(gulp.dest('css'));
 });
 
+gulp.task('js', function(){
+  return gulp.src(['src/monsquaz.js'])
+    .pipe(uglify())
+    .pipe(gulp.dest('js'));
+});
+
 gulp.task('default', function() {
-  gulp.watch('*.scss', ['css']);
+  gulp.watch('src/monsquaz.scss', ['css']);
+  gulp.watch('src/monsquaz.js', ['js']);
 });
