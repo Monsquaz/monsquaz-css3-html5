@@ -16,6 +16,8 @@ $scene-2-start: $scene-1-start + $green-arrows-frames;
 $scene-3-start: $scene-2-start + $sunset-frames;
 $scene-4-start: $scene-3-start + $pink-arrows-frames;
 
+$timing-function: 'linear';
+
 
 
 @function framesToPercent($frames) {
@@ -119,7 +121,7 @@ audio {
       left:       w(57px);
       width:      w(136px);
       height:     h(146px);
-      animation:  up-arrow-1-position $movie-seconds linear infinite,
+      animation:  up-arrow-1-position $movie-seconds #{$timing-function} infinite,
                   up-arrow-opacity    $movie-seconds steps(1, end) infinite;
 
     }
@@ -147,7 +149,7 @@ audio {
       left:   h(300px);
       width:  w(136px);
       height: h(146px);
-      animation:  up-arrow-2-position $movie-seconds linear infinite,
+      animation:  up-arrow-2-position $movie-seconds #{$timing-function} infinite,
                   up-arrow-opacity    $movie-seconds steps(1, end) infinite;
     }
 
@@ -162,9 +164,11 @@ audio {
 
     #down-arrow-1 {
       top:    h(187px);
-      left:   w(36px);
+      left:   w(250px);
       width:  w(136px);
       height: h(146px);
+      animation:  down-arrow-1-position $movie-seconds #{$timing-function} infinite,
+                  down-arrow-opacity    $movie-seconds steps(1, end) infinite;
     }
 
     #down-arrow-2 {
@@ -172,6 +176,38 @@ audio {
       left:   w(317px);
       width:  w(136px);
       height: h(146px);
+      animation:  down-arrow-2-position $movie-seconds #{$timing-function} infinite,
+                  down-arrow-opacity    $movie-seconds steps(1, end) infinite;
+    }
+
+    @keyframes down-arrow-1-position {
+      0% {
+        top: h(0px);
+      }
+      #{framesToPercent($scene-4-start)}, 100%  {
+        top: h(300px);
+      }
+    }
+
+    @keyframes down-arrow-2-position {
+      0% {
+        top: h(100px);
+      }
+      #{framesToPercent($scene-4-start)}, 100%  {
+        top: h(200px);
+      }
+    }
+
+    @keyframes down-arrow-opacity {
+      0% {
+        opacity: 0;
+      }
+      #{framesToPercent($scene-3-start)} {
+        opacity: 1;
+      }
+      #{framesToPercent($scene-4-start)}, 100% {
+        opacity: 0;
+      }
     }
 
     #deven-gallo-1 {
@@ -179,7 +215,7 @@ audio {
       left:   w(5px);
       width:  w(104px);
       height: h(277px);
-      animation:  deven-gallo-1-position $movie-seconds linear infinite,
+      animation:  deven-gallo-1-position $movie-seconds #{$timing-function} infinite,
                   deven-gallo-opacity $movie-seconds steps(1, end) infinite;
     }
 
@@ -188,7 +224,7 @@ audio {
       left:   w(470px);
       width:  w(104px);
       height: h(277px);
-      animation:  deven-gallo-2-position $movie-seconds linear infinite,
+      animation:  deven-gallo-2-position $movie-seconds #{$timing-function} infinite,
                   deven-gallo-opacity $movie-seconds steps(1, end) infinite;
 
     }
@@ -199,7 +235,7 @@ audio {
       width:  w(203px);
       height: h(405px);
       animation:
-        monsquaz-up framesToSeconds($movie-total-frames) linear 0s infinite,
+        monsquaz-up framesToSeconds($movie-total-frames) #{$timing-function} 0s infinite,
         monsquaz-up-opacity framesToSeconds($movie-total-frames) steps(1, end) infinite;
 
     }
@@ -208,7 +244,7 @@ audio {
       width:  w(203px);
       height: h(405px);
       animation:
-        monsquaz-dance framesToSeconds($movie-total-frames) linear 0s infinite,
+        monsquaz-dance framesToSeconds($movie-total-frames) #{$timing-function} 0s infinite,
         monsquaz-dance-opacity framesToSeconds($movie-total-frames) steps(1, end) infinite;
     }
 
@@ -216,7 +252,7 @@ audio {
       width:  w(203px);
       height: h(405px);
       animation:
-        monsquaz-down framesToSeconds($movie-total-frames) linear 0s infinite,
+        monsquaz-down framesToSeconds($movie-total-frames) #{$timing-function} 0s infinite,
         monsquaz-down-opacity framesToSeconds($movie-total-frames) steps(1, end) infinite;
     }
 
@@ -224,7 +260,7 @@ audio {
       width:  w(203px);
       height: h(405px);
       animation:
-        monsquaz-zoom framesToSeconds($movie-total-frames) linear 0s infinite,
+        monsquaz-zoom framesToSeconds($movie-total-frames) #{$timing-function} 0s infinite,
         monsquaz-zoom-opacity framesToSeconds($movie-total-frames) steps(1, end) infinite;
     }
 

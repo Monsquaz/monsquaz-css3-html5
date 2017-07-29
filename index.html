@@ -27,6 +27,9 @@
     var audio = new Audio("audio/masteraxe.wav");
     var monsquaz = document.getElementById('monsquaz-swf');
     var num_children = monsquaz.children.length;
+    document.addEventListener("visibilitychange", function(e){
+      console.warn('visibilitychange', e);
+    });
     audio.addEventListener('timeupdate', function(e){
         if((this.currentTime / this.duration) > 0.83) {
             var i;
