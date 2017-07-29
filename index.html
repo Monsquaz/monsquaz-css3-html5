@@ -22,24 +22,35 @@
     <img src="images/monsquazman.bmp" class="moving object" id="monsquaz-zoom" />
     <img src="images/d_gallo.gif" class="moving object" id="deven-gallo-1" />
     <img src="images/d_gallo.gif" class="moving object" id="deven-gallo-2" />
+    <div id="blue-square"></div>
+    <div id="red-square"></div>
+    <div id="yellow-circle"></div>
+    <div id="green-circle"></div>
   </div>
   <script>
     var audio = new Audio("audio/masteraxe.wav");
     var monsquaz = document.getElementById('monsquaz-swf');
     var num_children = monsquaz.children.length;
+    var restart = function() {
+      var i;
+      monsquaz.classList.remove('active');
+      for(i = 0; i < num_children; i++) {
+        void monsquaz.children[i].offsetWidth;
+      }
+      monsquaz.classList.add('active');
+      audio.currentTime = 0;
+      audio.play();
+    };
     document.addEventListener("visibilitychange", function(e){
-      console.warn('visibilitychange', e);
+      if(audio.paused) {
+        restart();
+      } else {
+        audio.pause();
+      }
     });
     audio.addEventListener('timeupdate', function(e){
         if((this.currentTime / this.duration) > 0.83) {
-            var i;
-            monsquaz.classList.remove('active');
-            for(i = 0; i < num_children; i++) {
-              void monsquaz.children[i].offsetWidth;
-            }
-            monsquaz.classList.add('active');
-            audio.currentTime = 0;
-            audio.play();
+          restart();
         }
       }, false);
     audio.addEventListener('canplaythrough', function(e){
