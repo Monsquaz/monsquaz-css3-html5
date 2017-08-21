@@ -38,11 +38,48 @@ audio {
   display: none !important;
 }
 
+body {
+  width: 100vw;
+  height: 100vh;
+  margin: 0;
+  padding: 0;
+  background: linear-gradient(
+    to bottom,
+    #bbffdd 0.00%,  #bbffdd 1.35%,
+    #aaffd5 1.35%,  #aaffd5 5.93%,
+    #99ffcc 5.93%,  #99ffcc 9.70%,
+    #88ffc4 9.70%,  #88ffc4 13.75%,
+    #77ffbb 13.75%, #77ffbb 17.52%,
+    #66ffb3 17.52%, #66ffb3 22.10%,
+    #55ffaa 22.10%, #55ffaa 26.15%,
+    #44ffa2 26.15%, #44ffa2 29.92%,
+    #33ff99 29.92%, #33ff99 33.96%,
+    #22ff91 33.96%, #22ff91 38.54%,
+    #11ff88 38.54%, #11ff88 42.59%,
+    #00ff80 42.59%, #00ff80 46.36%,
+    #00ee77 46.36%, #00ee77 50.40%,
+    #00dd6f 50.40%, #00dd6f 54.18%,
+    #00cc66 54.18%, #00cc66 58.76%,
+    #00bb5e 58.76%, #00bb5e 62.80%,
+    #00aa55 62.80%, #00aa55 66.58%,
+    #00994d 66.58%, #00994d 70.62%,
+    #008844 70.62%, #008844 75.20%,
+    #00773c 75.20%, #00773c 78.98%,
+    #006633 78.98%, #006633 83.02%,
+    #00552b 83.02%, #00552b 87.06%,
+    #004422 87.06%, #004422 91.64%,
+    #00331a 91.64%, #00331a 95.42%,
+    #002211 95.42%, #002211 99.46%,
+    #001109 99.46%, #001109 100.00%
+  ) no-repeat center center fixed;
+  background-size: cover;
+}
+
 #monsquaz-swf {
-  width:            $scene-width * 1.5;
+  width:            $scene-width  * 1.5;
   height:           $scene-height * 1.5;
-  top:              0px;
-  left:             0px;
+  top:              calc(50vh - 321.75px);
+  left:             calc(50vw - 430.5px);
   position:         fixed;
   background-color: red;
   visibility:       hidden;
@@ -81,6 +118,11 @@ audio {
     }
 
     #sunset-background {
+      clip-path: inset(33px 31px 0px 24px);
+      width: calc(100% + 58px);
+      left: -24px;
+      top: -34px;
+      height: calc(100% + 34px);
       animation:
         sunset-background-opacity $movie-seconds steps(1, end) infinite;
     }
@@ -276,8 +318,8 @@ audio {
     #up-arrow-1 {
       top:        h(240px);
       left:       w(55px);
-      width:      w(136px);
-      height:     h(146px);
+      width:      w(125px);
+      height:     h(149px);
       animation:  up-arrow-1-position $movie-seconds #{$timing-function} infinite,
                   up-arrow-opacity    $movie-seconds steps(1, end) infinite;
 
@@ -304,8 +346,8 @@ audio {
     #up-arrow-2 {
       top:    w(184px);
       left:   w(250px);
-      width:  w(136px);
-      height: h(146px);
+      width:  w(125px);
+      height: h(149px);
       animation:  up-arrow-2-position $movie-seconds #{$timing-function} infinite,
                   up-arrow-opacity    $movie-seconds steps(1, end) infinite;
     }
@@ -322,8 +364,8 @@ audio {
     #down-arrow-1 {
       top:    h(187px);
       left:   w(250px);
-      width:  w(136px);
-      height: h(146px);
+      width:  w(101px);
+      height: h(121px);
       animation:  down-arrow-1-position $movie-seconds #{$timing-function} infinite,
                   down-arrow-opacity    $movie-seconds steps(1, end) infinite;
     }
@@ -331,8 +373,8 @@ audio {
     #down-arrow-2 {
       top:    h(116px);
       left:   w(55px);
-      width:  w(136px);
-      height: h(146px);
+      width:  w(101px);
+      height: h(121px);
       animation:  down-arrow-2-position $movie-seconds #{$timing-function} infinite,
                   down-arrow-opacity    $movie-seconds steps(1, end) infinite;
     }
